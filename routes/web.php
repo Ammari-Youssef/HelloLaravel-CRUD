@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ComputersController;
+use App\Http\Controllers\NavigationController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [NavigationController::class , "index"])->name('welcome');
+Route::get('/home', [NavigationController::class , "home"])->name('home');
+Route::get('/about', [NavigationController::class , "about"])->name('home.about');
+Route::get('/contact', [NavigationController::class , "contact"])->name('home.contact');
+
+Route::post('/login', [LoginController::class , "login"])->name('login.show');
+Route::get('/login', [LoginController::class , "login"])->name('login');
+
+Route::resource('/computers',  ComputersController::class);
+
+
